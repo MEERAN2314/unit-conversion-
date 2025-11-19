@@ -1,0 +1,406 @@
+{% extends "base.html" %}
+
+{% block title %}About - Unit Converter Pro{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-10">
+        <!-- Hero Section -->
+        <div class="text-center mb-5">
+            <h1 class="display-4 gradient-text mb-4">
+                <i class="fas fa-info-circle me-3"></i>About Unit Converter Pro
+            </h1>
+            <p class="lead text-muted">
+                A comprehensive, professional-grade unit conversion library with beautiful web interface
+            </p>
+        </div>
+
+        <!-- Overview Card -->
+        <div class="card mb-5 pulse-blue">
+            <div class="card-header">
+                <h3 class="card-title mb-0">
+                    <i class="fas fa-rocket me-2"></i>Project Overview
+                </h3>
+            </div>
+            <div class="card-body p-4">
+                <div class="row">
+                    <div class="col-md-8">
+                        <p class="card-text fs-5 mb-4">
+                            The Unit Conversion Library is a Python-based tool designed to convert between different 
+                            units of measurement with high precision and accuracy. This web interface provides an 
+                            elegant, user-friendly frontend for the powerful conversion engine.
+                        </p>
+                        <p class="card-text">
+                            Built with modern web technologies including <strong>FastAPI</strong> and <strong>Jinja2</strong> templates, 
+                            it offers both a beautiful web interface and a comprehensive RESTful API for programmatic access.
+                        </p>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-award text-primary"></i>
+                        </div>
+                        <div class="badge bg-primary fs-6 px-3 py-2 mb-2">Professional Grade</div>
+                        <div class="badge bg-success fs-6 px-3 py-2 mb-2">High Precision</div>
+                        <div class="badge bg-info fs-6 px-3 py-2">API Ready</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Grid -->
+        <div class="card mb-5">
+            <div class="card-header">
+                <h4 class="card-title mb-0">
+                    <i class="fas fa-star me-2"></i>Key Features
+                </h4>
+            </div>
+            <div class="card-body p-4">
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-start">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-check-circle text-success fa-lg me-3"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold">Multiple Unit Categories</h6>
+                                <p class="text-muted mb-0">Length, temperature, pressure, flow, electrical, and more</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-start">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-check-circle text-success fa-lg me-3"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold">High Precision Conversions</h6>
+                                <p class="text-muted mb-0">Accurate calculations with proper mathematical formulas</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-start">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-check-circle text-success fa-lg me-3"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold">Temperature Formula Handling</h6>
+                                <p class="text-muted mb-0">Special handling for Celsius/Fahrenheit conversions</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-start">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-check-circle text-success fa-lg me-3"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold">Responsive Web Interface</h6>
+                                <p class="text-muted mb-0">Beautiful design that works on all devices</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-start">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-check-circle text-success fa-lg me-3"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold">RESTful API Access</h6>
+                                <p class="text-muted mb-0">Full API with interactive documentation</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-start">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-check-circle text-success fa-lg me-3"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold">Error Handling & Validation</h6>
+                                <p class="text-muted mb-0">Robust error handling with clear messages</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-start">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-check-circle text-success fa-lg me-3"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold">Copy-to-Clipboard</h6>
+                                <p class="text-muted mb-0">Easy copying of conversion results</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-start">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-check-circle text-success fa-lg me-3"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold">Print-Friendly Results</h6>
+                                <p class="text-muted mb-0">Professional formatting for printed output</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Supported Units -->
+        <div class="card mb-5">
+            <div class="card-header">
+                <h4 class="card-title mb-0">
+                    <i class="fas fa-list me-2"></i>Supported Unit Categories
+                </h4>
+            </div>
+            <div class="card-body p-4">
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="unit-category p-3 h-100">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-ruler text-primary fa-lg me-3"></i>
+                                <h6 class="text-primary mb-0">Length</h6>
+                            </div>
+                            <small class="text-muted">millimeter (mm), centimeter (cm), meter (m), inch (in), foot (ft)</small>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="unit-category p-3 h-100">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-thermometer-half text-warning fa-lg me-3"></i>
+                                <h6 class="text-warning mb-0">Temperature</h6>
+                            </div>
+                            <small class="text-muted">Celsius (°C), Fahrenheit (°F)</small>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="unit-category p-3 h-100">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-tachometer-alt text-success fa-lg me-3"></i>
+                                <h6 class="text-success mb-0">Pressure</h6>
+                            </div>
+                            <small class="text-muted">bar, bar gauge (bar(g))</small>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="unit-category p-3 h-100">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-water text-info fa-lg me-3"></i>
+                                <h6 class="text-info mb-0">Flow</h6>
+                            </div>
+                            <small class="text-muted">cubic feet per minute (CFM)</small>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="unit-category p-3 h-100">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-bolt text-danger fa-lg me-3"></i>
+                                <h6 class="text-danger mb-0">Electrical</h6>
+                            </div>
+                            <small class="text-muted">ampere (A), gigaohm (GΩ)</small>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="unit-category p-3 h-100">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-cogs text-secondary fa-lg me-3"></i>
+                                <h6 class="text-secondary mb-0">Other</h6>
+                            </div>
+                            <small class="text-muted">decibel (dB), gigahertz (GHz), velocity, mass</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- API Documentation -->
+        <div class="card mb-5">
+            <div class="card-header">
+                <h4 class="card-title mb-0">
+                    <i class="fas fa-code me-2"></i>API Documentation
+                </h4>
+            </div>
+            <div class="card-body p-4">
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <h6 class="fw-bold">Convert Units</h6>
+                        <div class="bg-dark text-light p-3 rounded mb-3">
+                            <code>POST /api/convert</code>
+                        </div>
+                        <p class="mb-3">Request body:</p>
+                        <pre class="bg-light p-3 rounded"><code>{
+  "value": 205,
+  "from_unit": "mm",
+  "to_units": ["m", "cm", "in", "ft"]
+}</code></pre>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <h6 class="fw-bold">Get Available Units</h6>
+                        <div class="bg-dark text-light p-3 rounded mb-3">
+                            <code>GET /api/units</code>
+                        </div>
+                        <p class="mb-3">Returns all available units organized by category.</p>
+                        <div class="d-flex gap-2">
+                            <a href="/docs" class="btn btn-primary btn-sm" target="_blank">
+                                <i class="fas fa-external-link-alt me-1"></i>Interactive Docs
+                            </a>
+                            <a href="/redoc" class="btn btn-outline-primary btn-sm" target="_blank">
+                                <i class="fas fa-book me-1"></i>ReDoc
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technical Details -->
+        <div class="card mb-5">
+            <div class="card-header">
+                <h4 class="card-title mb-0">
+                    <i class="fas fa-cog me-2"></i>Technical Architecture
+                </h4>
+            </div>
+            <div class="card-body p-4">
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <h6 class="fw-bold">Backend Technologies</h6>
+                        <div class="d-flex flex-wrap gap-2 mb-3">
+                            <span class="badge bg-primary fs-6 px-3 py-2">
+                                <i class="fab fa-python me-1"></i>Python 3.7+
+                            </span>
+                            <span class="badge bg-success fs-6 px-3 py-2">
+                                <i class="fas fa-rocket me-1"></i>FastAPI
+                            </span>
+                            <span class="badge bg-info fs-6 px-3 py-2">
+                                <i class="fas fa-code me-1"></i>Jinja2
+                            </span>
+                            <span class="badge bg-warning fs-6 px-3 py-2">
+                                <i class="fas fa-server me-1"></i>Uvicorn
+                            </span>
+                        </div>
+                        <ul class="list-unstyled">
+                            <li class="mb-2">
+                                <i class="fas fa-check text-success me-2"></i>
+                                Async/await support for high performance
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-check text-success me-2"></i>
+                                Automatic API documentation generation
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-check text-success me-2"></i>
+                                Type hints and Pydantic validation
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <h6 class="fw-bold">Frontend Technologies</h6>
+                        <div class="d-flex flex-wrap gap-2 mb-3">
+                            <span class="badge bg-primary fs-6 px-3 py-2">
+                                <i class="fab fa-bootstrap me-1"></i>Bootstrap 5
+                            </span>
+                            <span class="badge bg-warning fs-6 px-3 py-2">
+                                <i class="fab fa-js me-1"></i>JavaScript ES6+
+                            </span>
+                            <span class="badge bg-info fs-6 px-3 py-2">
+                                <i class="fab fa-font-awesome me-1"></i>Font Awesome
+                            </span>
+                            <span class="badge bg-success fs-6 px-3 py-2">
+                                <i class="fab fa-css3-alt me-1"></i>Custom CSS
+                            </span>
+                        </div>
+                        <ul class="list-unstyled">
+                            <li class="mb-2">
+                                <i class="fas fa-check text-success me-2"></i>
+                                Responsive design for all devices
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-check text-success me-2"></i>
+                                Modern blue and white theme
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-check text-success me-2"></i>
+                                Smooth animations and transitions
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Usage Examples -->
+        <div class="card mb-5">
+            <div class="card-header">
+                <h4 class="card-title mb-0">
+                    <i class="fas fa-lightbulb me-2"></i>Usage Examples
+                </h4>
+            </div>
+            <div class="card-body p-4">
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="text-center p-4 bg-light rounded-3">
+                            <div class="feature-icon">
+                                <i class="fas fa-ruler text-primary"></i>
+                            </div>
+                            <h6 class="fw-bold">Length Conversion</h6>
+                            <p class="text-muted mb-2">205 mm converts to:</p>
+                            <div class="small">
+                                <div class="badge bg-light text-primary mb-1">0.205 m</div>
+                                <div class="badge bg-light text-primary mb-1">20.5 cm</div>
+                                <div class="badge bg-light text-primary mb-1">8.07 in</div>
+                                <div class="badge bg-light text-primary">0.67 ft</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-center p-4 bg-light rounded-3">
+                            <div class="feature-icon">
+                                <i class="fas fa-thermometer-half text-warning"></i>
+                            </div>
+                            <h6 class="fw-bold">Temperature</h6>
+                            <p class="text-muted mb-2">25°C converts to:</p>
+                            <div class="small">
+                                <div class="badge bg-light text-warning">77°F</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-center p-4 bg-light rounded-3">
+                            <div class="feature-icon">
+                                <i class="fas fa-tachometer-alt text-success"></i>
+                            </div>
+                            <h6 class="fw-bold">Pressure</h6>
+                            <p class="text-muted mb-2">2 bar converts to:</p>
+                            <div class="small">
+                                <div class="badge bg-light text-success">2 bar(g)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="text-center mb-5">
+            <div class="card bg-primary text-white">
+                <div class="card-body p-5">
+                    <h3 class="card-title mb-3">Ready to Start Converting?</h3>
+                    <p class="card-text fs-5 mb-4">
+                        Experience professional unit conversion with precision and style
+                    </p>
+                    <div class="d-flex flex-wrap justify-content-center gap-3">
+                        <a href="/" class="btn btn-light btn-lg">
+                            <i class="fas fa-play me-2"></i>Start Converting
+                        </a>
+                        <a href="/docs" class="btn btn-outline-light btn-lg" target="_blank">
+                            <i class="fas fa-book me-2"></i>API Documentation
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,384 @@
+{% extends "base.html" %}
+
+{% block title %}Conversion Results - Unit Converter Pro{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-11">
+        <!-- Header -->
+        <div class="text-center mb-5">
+            <h2 class="gradient-text mb-3">
+                <i class="fas fa-check-circle me-2"></i>Conversion Results
+            </h2>
+            <p class="lead text-muted">
+                Professional unit conversion completed with precision
+            </p>
+        </div>
+
+        <!-- Original Value Display -->
+        <div class="conversion-result p-5 mb-5 text-center position-relative">
+            <div class="row align-items-center">
+                <div class="col-md-4">
+                    <h6 class="text-uppercase opacity-75 mb-2">Original Value</h6>
+                    <h2 class="mb-0 fw-bold">{{ original_value }}</h2>
+                </div>
+                <div class="col-md-4">
+                    <div class="my-3">
+                        <i class="fas fa-arrow-right fa-2x opacity-75"></i>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h6 class="text-uppercase opacity-75 mb-2">Unit Type</h6>
+                    <h4 class="mb-0">{{ original_unit }} - {{ original_unit_name }}</h4>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conversion Results Grid -->
+        <div class="row g-4 mb-5">
+            {% for conversion in conversions %}
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <div class="mb-3">
+                                <div class="result-value">
+                                    {{ conversion.formatted_value }}
+                                </div>
+                                <div class="mt-2">
+                                    <span class="badge bg-primary fs-6 px-3 py-2">
+                                        {{ conversion.symbol }}
+                                    </span>
+                                </div>
+                            </div>
+                            <h6 class="card-title text-dark mb-3">{{ conversion.name }}</h6>
+                            
+                            <!-- Action Buttons -->
+                            <div class="d-flex gap-2 justify-content-center">
+                                <button class="btn btn-outline-primary btn-sm" 
+                                        onclick="copyToClipboard('{{ conversion.formatted_value }} {{ conversion.symbol }}')"
+                                        title="Copy formatted value">
+                                    <i class="fas fa-copy me-1"></i>Copy
+                                </button>
+                                <button class="btn btn-outline-secondary btn-sm" 
+                                        onclick="copyToClipboard('{{ conversion.value }}')"
+                                        title="Copy precise value">
+                                    <i class="fas fa-calculator me-1"></i>Precise
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Detailed Results Table -->
+        <div class="card mb-5">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-table me-2"></i>Detailed Conversion Table
+                </h5>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead style="background: linear-gradient(135deg, var(--light-blue) 0%, var(--white) 100%);">
+                            <tr>
+                                <th class="px-4 py-3">
+                                    <i class="fas fa-tag me-2"></i>Unit Symbol
+                                </th>
+                                <th class="px-4 py-3">
+                                    <i class="fas fa-info-circle me-2"></i>Unit Name
+                                </th>
+                                <th class="px-4 py-3">
+                                    <i class="fas fa-eye me-2"></i>Display Value
+                                </th>
+                                <th class="px-4 py-3">
+                                    <i class="fas fa-calculator me-2"></i>Precise Value
+                                </th>
+                                <th class="px-4 py-3 text-center">
+                                    <i class="fas fa-tools me-2"></i>Actions
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for conversion in conversions %}
+                                <tr class="align-middle">
+                                    <td class="px-4 py-3">
+                                        <span class="badge bg-primary fs-6">{{ conversion.symbol }}</span>
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        <strong>{{ conversion.name }}</strong>
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        <span class="text-primary fw-bold fs-5">{{ conversion.formatted_value }}</span>
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        <code class="bg-light px-2 py-1 rounded">{{ "%.10f"|format(conversion.value) }}</code>
+                                    </td>
+                                    <td class="px-4 py-3 text-center">
+                                        <div class="btn-group" role="group">
+                                            <button class="btn btn-sm btn-outline-primary" 
+                                                    onclick="copyToClipboard('{{ conversion.formatted_value }}')"
+                                                    title="Copy display value">
+                                                <i class="fas fa-copy"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-secondary" 
+                                                    onclick="copyToClipboard('{{ conversion.value }}')"
+                                                    title="Copy precise value">
+                                                <i class="fas fa-calculator"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="text-center mb-5">
+            <div class="d-flex flex-wrap justify-content-center gap-3">
+                <a href="/" class="btn btn-primary btn-lg">
+                    <i class="fas fa-plus me-2"></i>New Conversion
+                </a>
+                <button class="btn btn-outline-primary btn-lg" onclick="window.print()">
+                    <i class="fas fa-print me-2"></i>Print Results
+                </button>
+                <button class="btn btn-outline-secondary btn-lg" onclick="shareResults()">
+                    <i class="fas fa-share-alt me-2"></i>Share
+                </button>
+                <button class="btn btn-outline-success btn-lg" onclick="exportToCSV()">
+                    <i class="fas fa-download me-2"></i>Export CSV
+                </button>
+            </div>
+        </div>
+
+        <!-- Conversion Summary -->
+        <div class="card bg-light border-0">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h6 class="card-title mb-2">
+                            <i class="fas fa-info-circle me-2 text-primary"></i>Conversion Summary
+                        </h6>
+                        <p class="card-text mb-0">
+                            <strong>{{ original_value }} {{ original_unit }}</strong> ({{ original_unit_name }}) 
+                            converted to <strong>{{ conversions|length }}</strong> different unit{{ 's' if conversions|length != 1 else '' }}.
+                            <br>
+                            <small class="text-muted">
+                                <i class="fas fa-shield-alt me-1"></i>
+                                All conversions use precise mathematical formulas and are accurate to multiple decimal places.
+                            </small>
+                        </p>
+                    </div>
+                    <div class="col-md-4 text-md-end">
+                        <div class="d-flex justify-content-md-end gap-2">
+                            <span class="badge bg-success fs-6 px-3 py-2">
+                                <i class="fas fa-check me-1"></i>{{ conversions|length }} Results
+                            </span>
+                            <span class="badge bg-info fs-6 px-3 py-2">
+                                <i class="fas fa-clock me-1"></i>Instant
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Toast Notifications -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="copyToast" class="toast" role="alert">
+        <div class="toast-header bg-primary text-white">
+            <i class="fas fa-check-circle me-2"></i>
+            <strong class="me-auto">Success!</strong>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
+        </div>
+        <div class="toast-body">
+            <span id="toastMessage">Value copied to clipboard</span>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Enhanced clipboard functionality with better UX
+    async function copyToClipboard(text) {
+        try {
+            await navigator.clipboard.writeText(text);
+            showToast(`Copied: ${text}`);
+        } catch (err) {
+            // Fallback for older browsers
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            textArea.style.top = '-999999px';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                showToast(`Copied: ${text}`);
+            } catch (err) {
+                showToast('Failed to copy to clipboard', 'error');
+            }
+            
+            document.body.removeChild(textArea);
+        }
+    }
+
+    // Enhanced toast notification
+    function showToast(message, type = 'success') {
+        const toast = document.getElementById('copyToast');
+        const toastMessage = document.getElementById('toastMessage');
+        const toastHeader = toast.querySelector('.toast-header');
+        
+        toastMessage.textContent = message;
+        
+        // Change toast style based on type
+        if (type === 'error') {
+            toastHeader.className = 'toast-header bg-danger text-white';
+        } else {
+            toastHeader.className = 'toast-header bg-primary text-white';
+        }
+        
+        const bsToast = new bootstrap.Toast(toast, {
+            autohide: true,
+            delay: 3000
+        });
+        bsToast.show();
+    }
+
+    // Share results functionality
+    function shareResults() {
+        const originalValue = {{ original_value }};
+        const originalUnit = "{{ original_unit }}";
+        const conversions = [
+            {% for conversion in conversions %}
+            "{{ conversion.formatted_value }} {{ conversion.symbol }}"{{ "," if not loop.last }}
+            {% endfor %}
+        ];
+        
+        const shareText = `Unit Conversion Result:\n${originalValue} ${originalUnit} converts to:\n${conversions.join('\n')}\n\nConverted using Unit Converter Pro`;
+        
+        if (navigator.share) {
+            navigator.share({
+                title: 'Unit Conversion Results',
+                text: shareText,
+                url: window.location.href
+            });
+        } else {
+            copyToClipboard(shareText);
+            showToast('Results copied to clipboard for sharing!');
+        }
+    }
+
+    // Export to CSV functionality
+    function exportToCSV() {
+        const data = [
+            ['Original Value', 'Original Unit', 'Converted Value', 'Converted Unit', 'Unit Name'],
+            {% for conversion in conversions %}
+            ['{{ original_value }}', '{{ original_unit }}', '{{ conversion.value }}', '{{ conversion.symbol }}', '{{ conversion.name }}']{{ "," if not loop.last }}
+            {% endfor %}
+        ];
+        
+        const csvContent = data.map(row => row.map(field => `"${field}"`).join(',')).join('\n');
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        
+        if (link.download !== undefined) {
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', `unit_conversion_${Date.now()}.csv`);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            showToast('CSV file downloaded successfully!');
+        }
+    }
+
+    // Add animation to result cards on load
+    document.addEventListener('DOMContentLoaded', function() {
+        const cards = document.querySelectorAll('.card');
+        cards.forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                card.style.transition = 'all 0.5s ease';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, index * 100);
+        });
+    });
+
+    // Enhanced print styles
+    const printStyles = `
+        <style media="print">
+            .btn, .toast-container, nav, footer, .btn-group { display: none !important; }
+            .card { 
+                border: 2px solid var(--primary-blue) !important; 
+                break-inside: avoid;
+                margin-bottom: 1rem;
+            }
+            .conversion-result { 
+                background: var(--light-blue) !important; 
+                color: var(--primary-blue) !important; 
+                -webkit-print-color-adjust: exact;
+            }
+            .result-value {
+                color: var(--primary-blue) !important;
+                -webkit-print-color-adjust: exact;
+            }
+            .badge {
+                border: 1px solid var(--primary-blue) !important;
+                -webkit-print-color-adjust: exact;
+            }
+            @page {
+                margin: 1in;
+                size: A4;
+            }
+            body {
+                font-size: 12pt;
+                line-height: 1.4;
+            }
+            .card-header {
+                background: var(--primary-blue) !important;
+                color: white !important;
+                -webkit-print-color-adjust: exact;
+            }
+        </style>
+    `;
+    document.head.insertAdjacentHTML('beforeend', printStyles);
+
+    // Add keyboard shortcuts
+    document.addEventListener('keydown', function(event) {
+        // Ctrl/Cmd + C to copy first result
+        if ((event.ctrlKey || event.metaKey) && event.key === 'c' && !event.target.matches('input, textarea')) {
+            event.preventDefault();
+            const firstResult = document.querySelector('[onclick*="copyToClipboard"]');
+            if (firstResult) {
+                firstResult.click();
+            }
+        }
+        
+        // Ctrl/Cmd + P to print
+        if ((event.ctrlKey || event.metaKey) && event.key === 'p') {
+            event.preventDefault();
+            window.print();
+        }
+        
+        // Escape to go back to home
+        if (event.key === 'Escape') {
+            window.location.href = '/';
+        }
+    });
+</script>
+{% endblock %}
