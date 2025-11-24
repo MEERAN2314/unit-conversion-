@@ -1,12 +1,13 @@
 """
 Unit Conversion Library
 
-A Python library for converting between different units of measurement.
-Supports length, mass, temperature, pressure, flow, and other unit categories.
+A dynamic Python library for converting between 4000+ units of measurement.
+Powered by Pint for advanced dimensional analysis and conversions.
 """
 
-from .converter import UnitConverter
-from .units import UnitCategory, Unit
+from .converter import UnitConverter, ConversionResult
+from .units import UnitCategory, UNIT_REGISTRY, get_unit_category, get_category_units
 
-__version__ = "1.0.0"
-__all__ = ["UnitConverter", "UnitCategory", "Unit"]
+__version__ = "2.0.0"
+__all__ = ["UnitConverter", "ConversionResult", "UnitCategory", "UNIT_REGISTRY", 
+           "get_unit_category", "get_category_units"]

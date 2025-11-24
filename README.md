@@ -1,24 +1,47 @@
-# Unit Converter Pro
+# Unit Converter Pro 🚀
 
-A comprehensive, professional-grade unit conversion library with a beautiful blue and white web interface built with Python, FastAPI, and Jinja2.
+A dynamic, professional-grade unit conversion library powered by **Pint** with 4000+ units support. Features a beautiful blue and white web interface built with Python, FastAPI, and modern web technologies.
 
 ![Unit Converter Pro](https://img.shields.io/badge/Unit%20Converter-Pro-blue?style=for-the-badge)
-![Python](https://img.shields.io/badge/Python-3.7+-blue?style=flat-square&logo=python)
+![Python](https://img.shields.io/badge/Python-3.11+-blue?style=flat-square&logo=python)
 ![FastAPI](https://img.shields.io/badge/FastAPI-Latest-green?style=flat-square&logo=fastapi)
+![Pint](https://img.shields.io/badge/Pint-0.25.2-orange?style=flat-square)
 ![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)
+
+## ✨ What's New in v2.0
+
+- 🎯 **Powered by Pint**: 4000+ units with automatic dimensional analysis
+- 🧮 **Expression Parser**: Evaluate "5 meters + 3 feet" directly
+- 🔄 **Dynamic Conversions**: No hardcoded conversion factors
+- 🌡️ **Advanced Temperature**: Celsius, Fahrenheit, Kelvin, Rankine
+- ⚡ **20+ Categories**: Length, mass, energy, power, velocity, and more
+- 🚀 **Production Ready**: Optimized for Render deployment
+- 📊 **Context-Aware**: Specialized conversions for different domains
 
 ## 🌟 Features
 
+### Core Capabilities
+- **🎯 4000+ Units**: Powered by Pint library with comprehensive unit support
+- **🧮 Expression Parser**: Evaluate complex expressions like "5 meters + 3 feet"
+- **🔄 Dynamic Conversions**: Automatic dimensional analysis, no hardcoded factors
+- **📊 20+ Categories**: Length, mass, temperature, energy, power, velocity, and more
+- **🌡️ Advanced Temperature**: Celsius, Fahrenheit, Kelvin, Rankine with proper formulas
+- **⚡ Context-Aware**: Specialized conversions for different scientific domains
+
+### Web Interface
 - **🎨 Beautiful Blue & White Theme**: Professional, modern design with smooth animations
-- **⚡ High-Performance FastAPI Backend**: Async support with automatic API documentation
 - **📱 Responsive Design**: Works perfectly on desktop, tablet, and mobile devices
-- **🔢 Multiple Unit Categories**: Length, temperature, pressure, flow, electrical, and more
-- **🎯 High Precision**: Accurate conversions with proper mathematical formulas
+- **💾 Auto-save**: Form data persistence using localStorage
 - **📋 Copy to Clipboard**: Easy copying of conversion results
 - **🖨️ Print Support**: Professional formatting for printed output
-- **💾 Auto-save**: Form data persistence using localStorage
-- **🔗 RESTful API**: Full API with interactive Swagger documentation
 - **⌨️ Keyboard Shortcuts**: Enhanced productivity with hotkeys
+
+### API & Integration
+- **🔗 RESTful API**: Full API with interactive Swagger documentation
+- **⚡ High-Performance**: FastAPI backend with async support
+- **🚀 Production Ready**: Optimized for Render, Heroku, Railway deployment
+- **📚 Auto Documentation**: Swagger UI and ReDoc included
+- **🔌 Easy Integration**: Python library or REST API
 
 ## 🚀 Quick Start
 
@@ -56,30 +79,40 @@ python app.py
 - **📖 Alternative API Docs**: http://localhost:5000/redoc
 - **ℹ️ About Page**: http://localhost:5000/about
 
-## 📊 Supported Units
+## 📊 Supported Unit Categories (4000+ Units)
 
-### Length Units
-- **mm** - millimeter
-- **cm** - centimeter
-- **m** - meter
-- **in** - inch
-- **ft** - foot
+### Physical Quantities
+- **Length**: mm, cm, m, km, in, ft, yd, mi, nm, μm
+- **Mass**: g, kg, mg, lb, oz, ton, tonne
+- **Temperature**: °C, °F, K, °R (Celsius, Fahrenheit, Kelvin, Rankine)
+- **Time**: s, min, h, day, week, year
+- **Area**: m², km², ft², acre, hectare
+- **Volume**: L, mL, gal, qt, cup, fl_oz
 
-### Temperature Units
-- **°C** - degrees Celsius
-- **°F** - degrees Fahrenheit
+### Energy & Power
+- **Energy**: J, kJ, cal, kcal, Wh, kWh, BTU, eV
+- **Power**: W, kW, MW, hp (horsepower)
+- **Force**: N, kN, lbf (newton, pound-force)
 
-### Pressure Units
-- **bar** - bar (1 bar = 100 kPa)
-- **bar(g)** - bar gauge
+### Motion & Mechanics
+- **Velocity**: m/s, km/h, mph, ft/s, knot
+- **Acceleration**: m/s², ft/s²
+- **Pressure**: Pa, kPa, bar, psi, atm, mmHg, torr
+- **Flow**: CFM, L/s, m³/s, gal/min
 
-### Other Categories
-- **Flow**: CFM (cubic feet per minute)
-- **Electrical**: A (ampere), GΩ (gigaohm)
+### Electrical
+- **Current**: A, mA (ampere, milliampere)
+- **Voltage**: V, kV (volt, kilovolt)
+- **Resistance**: Ω, kΩ, MΩ (ohm, kiloohm, megaohm)
+- **Capacitance**: F, μF, pF (farad, microfarad, picofarad)
+
+### Other
+- **Frequency**: Hz, kHz, MHz, GHz
+- **Angle**: rad, deg (radian, degree)
+- **Density**: kg/m³, g/cm³, lb/ft³
 - **Acoustics**: dB (decibel)
-- **Velocity**: ft/s (foot per second)
-- **Frequency**: GHz (gigahertz)
-- **Mass**: g (gram)
+
+**And 3900+ more units!** Pint supports SI, imperial, US customary, and specialized scientific units.
 
 ## 💻 Usage Examples
 
@@ -92,40 +125,53 @@ python app.py
    - Click "Convert Units"
 
 2. **Quick Examples**:
-   - Click example cards to auto-fill the form
    - 205 mm → 0.205 m, 20.5 cm, 8.07 inches, 0.67 ft
-   - 25°C → 77°F
-   - 12 inches → 1 ft, 30.48 cm, 0.3048 m
+   - 25°C → 77°F, 298.15 K
+   - 100 km/h → 27.78 m/s, 62.14 mph
+   - 1 kWh → 3,600,000 J, 860,421 cal
 
 ### Python Library
 
 ```python
 from unit_converter import UnitConverter
 
-# Initialize converter
+# Initialize converter (powered by Pint)
 converter = UnitConverter()
 
-# Convert 205 mm to other units
+# Basic conversion
 result = converter.convert(205, "mm", ["m", "cm", "in", "ft"])
-
 print(f"205 mm = {result.get_conversion('m')} meters")
-print(f"205 mm = {result.get_conversion('cm')} centimeters")
-print(f"205 mm = {result.get_conversion('in')} inches")
-print(f"205 mm = {result.get_conversion('ft')} feet")
+# Output: 205 mm = 0.205 meters
 
-# Temperature conversion
-temp_result = converter.convert(25, "DEG_C", ["DEG_F"])
-print(f"25°C = {temp_result.get_conversion('DEG_F')}°F")
+# Temperature conversion (all scales supported)
+temp = converter.convert(25, "degC", ["degF", "K"])
+print(f"25°C = {temp.get_conversion('degF')}°F")
+# Output: 25°C = 77.0°F
 
 # Auto-convert to all compatible units
 result = converter.convert(1, "m")  # Converts to all length units
+
+# Advanced: Expression parsing
+result = converter.parse_expression("5 meters + 3 feet")
+print(f"Result: {result['value']} {result['unit']}")
+# Output: Result: 5.9144 meter
+
+# Context-aware conversion
+speed = converter.convert(100, "km/h", ["m/s", "mph"])
+print(f"100 km/h = {speed.get_conversion('m/s'):.2f} m/s")
+# Output: 100 km/h = 27.78 m/s
+
+# Energy conversions
+energy = converter.convert(1, "kWh", ["J", "cal", "BTU"])
+print(f"1 kWh = {energy.get_conversion('J'):,.0f} joules")
+# Output: 1 kWh = 3,600,000 joules
 ```
 
 ### API Usage
 
 ```bash
 # Convert units via REST API
-curl -X POST http://localhost:5000/api/convert \
+curl -X POST https://your-app.onrender.com/api/convert \
   -H "Content-Type: application/json" \
   -d '{
     "value": 205,
@@ -133,23 +179,62 @@ curl -X POST http://localhost:5000/api/convert \
     "to_units": ["m", "cm", "in", "ft"]
   }'
 
-# Get available units
-curl http://localhost:5000/api/units
+# Response:
+{
+  "success": true,
+  "original_value": 205,
+  "original_unit": "mm",
+  "conversions": {
+    "m": 0.205,
+    "cm": 20.5,
+    "in": 8.070866,
+    "ft": 0.672572
+  }
+}
+
+# Evaluate expression
+curl -X POST https://your-app.onrender.com/api/expression \
+  -H "Content-Type: application/json" \
+  -d '{"expression": "5 meters + 3 feet"}'
+
+# Get all available units
+curl https://your-app.onrender.com/api/units
+
+# Health check
+curl https://your-app.onrender.com/health
 ```
 
 ### JavaScript Integration
 
 ```javascript
-// Initialize API client
-const api = new UnitConverterAPI();
+// Fetch API example
+async function convertUnits(value, fromUnit, toUnits) {
+  const response = await fetch('https://your-app.onrender.com/api/convert', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ value, from_unit: fromUnit, to_units: toUnits })
+  });
+  return await response.json();
+}
 
-// Convert units
-const result = await api.convert(205, 'mm', ['m', 'cm', 'in', 'ft']);
+// Usage
+const result = await convertUnits(205, 'mm', ['m', 'cm', 'in', 'ft']);
 console.log(result.conversions);
+// Output: { m: 0.205, cm: 20.5, in: 8.070866, ft: 0.672572 }
 
-// Get available units
-const units = await api.getUnits();
-console.log(units);
+// Expression evaluation
+async function evaluateExpression(expr) {
+  const response = await fetch('https://your-app.onrender.com/api/expression', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ expression: expr })
+  });
+  return await response.json();
+}
+
+const result = await evaluateExpression('5 meters + 3 feet');
+console.log(`${result.value} ${result.unit}`);
+// Output: 5.9144 meter
 ```
 
 ## 🎨 Design Features
@@ -208,34 +293,56 @@ python -m unittest tests.test_converter.TestUnitConverter.test_length_conversion
 
 ## 📦 Deployment
 
-### Development
+### Quick Deploy to Render (Recommended)
+
+1. **Fork/Clone this repository**
+2. **Push to GitHub**
+3. **Go to [Render Dashboard](https://dashboard.render.com/)**
+4. **Click "New" → "Blueprint"**
+5. **Connect your repository**
+6. **Click "Apply"** - Render auto-detects `render.yaml`
+7. **Done!** Your app is live at `https://your-app.onrender.com`
+
+See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed instructions.
+
+### Local Development
 ```bash
-uvicorn app:app --host 0.0.0.0 --port 5000 --reload
+# Install dependencies
+pip install -r requirements.txt
+pip install -e .
+
+# Run development server
+cd web_app
+python app.py
+
+# Or with uvicorn
+uvicorn app:app --reload --host 0.0.0.0 --port 5000
 ```
 
-### Production
+### Production with Docker
 ```bash
-# Basic production
-uvicorn app:app --host 0.0.0.0 --port 5000 --workers 4
+# Build image
+docker build -t unit-converter-pro .
 
-# With Gunicorn
-gunicorn app:app -w 4 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:5000
+# Run container
+docker run -p 5000:5000 unit-converter-pro
+
+# Access at http://localhost:5000
 ```
 
-### Docker
-```dockerfile
-FROM python:3.11-slim
-
-WORKDIR /app
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
-COPY . .
-RUN pip install -e ".[web]"
-
-EXPOSE 5000
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "5000"]
+### Production with Gunicorn
+```bash
+cd web_app
+gunicorn app:app \
+  --workers 4 \
+  --worker-class uvicorn.workers.UvicornWorker \
+  --bind 0.0.0.0:5000
 ```
+
+### Environment Variables
+- `PORT` - Server port (default: 5000)
+- `PYTHON_VERSION` - Python version (3.11.0)
+- `DEBUG` - Debug mode (false in production)
 
 ## ⌨️ Keyboard Shortcuts
 

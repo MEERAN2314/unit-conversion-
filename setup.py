@@ -9,10 +9,10 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="unit-conversion-library",
-    version="1.0.0",
+    version="2.0.0",
     author="Developer",
     author_email="developer@example.com",
-    description="A Python library for converting between different units of measurement",
+    description="Dynamic unit conversion library powered by Pint with 4000+ units support",
     long_description=long_description,
     long_description_content_type="text/markdown",
     packages=find_packages(),
@@ -33,7 +33,7 @@ setup(
     ],
     python_requires=">=3.7",
     install_requires=[
-        # No external dependencies required for core functionality
+        "pint==0.25.2",
     ],
     extras_require={
         "web": [
@@ -42,6 +42,7 @@ setup(
             "jinja2>=3.1.0",
             "python-multipart>=0.0.6",
             "aiofiles>=23.0.0",
+            "gunicorn>=21.2.0",
         ],
         "dev": [
             "pytest>=6.0",

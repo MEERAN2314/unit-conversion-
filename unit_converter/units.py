@@ -1,9 +1,13 @@
 """
-Unit definitions and categories for the conversion library.
+Dynamic unit definitions using Pint library with 4000+ units support.
 """
 
 from enum import Enum
-from typing import Dict
+from typing import Dict, List, Optional
+import pint
+
+# Initialize Pint Unit Registry (singleton)
+UNIT_REGISTRY = pint.UnitRegistry()
 
 
 class UnitCategory(Enum):
@@ -12,67 +16,235 @@ class UnitCategory(Enum):
     MASS = "mass"
     TEMPERATURE = "temperature"
     PRESSURE = "pressure"
+    VOLUME = "volume"
     FLOW = "flow"
-    ELECTRICAL_CURRENT = "electrical_current"
-    ACOUSTICS = "acoustics"
     VELOCITY = "velocity"
-    FREQUENCY = "frequency"
+    ACCELERATION = "acceleration"
+    FORCE = "force"
+    ENERGY = "energy"
+    POWER = "power"
+    ELECTRICAL_CURRENT = "electrical_current"
+    ELECTRICAL_POTENTIAL = "electrical_potential"
     ELECTRICAL_RESISTANCE = "electrical_resistance"
+    ELECTRICAL_CAPACITANCE = "electrical_capacitance"
+    FREQUENCY = "frequency"
+    ANGLE = "angle"
+    TIME = "time"
+    AREA = "area"
+    DENSITY = "density"
+    ACOUSTICS = "acoustics"
 
 
-class Unit:
-    """Represents a unit with its conversion factor and metadata."""
+# Mapping of unit symbols to categories for quick lookup
+UNIT_CATEGORY_MAP: Dict[str, UnitCategory] = {
+    # Length
+    "mm": UnitCategory.LENGTH,
+    "millimeter": UnitCategory.LENGTH,
+    "cm": UnitCategory.LENGTH,
+    "centimeter": UnitCategory.LENGTH,
+    "m": UnitCategory.LENGTH,
+    "meter": UnitCategory.LENGTH,
+    "km": UnitCategory.LENGTH,
+    "kilometer": UnitCategory.LENGTH,
+    "in": UnitCategory.LENGTH,
+    "inch": UnitCategory.LENGTH,
+    "ft": UnitCategory.LENGTH,
+    "foot": UnitCategory.LENGTH,
+    "yd": UnitCategory.LENGTH,
+    "yard": UnitCategory.LENGTH,
+    "mi": UnitCategory.LENGTH,
+    "mile": UnitCategory.LENGTH,
+    "nm": UnitCategory.LENGTH,
+    "nanometer": UnitCategory.LENGTH,
+    "um": UnitCategory.LENGTH,
+    "micrometer": UnitCategory.LENGTH,
     
-    def __init__(self, symbol: str, name: str, category: UnitCategory, 
-                 to_base_factor: float, notes: str = ""):
-        self.symbol = symbol
-        self.name = name
-        self.category = category
-        self.to_base_factor = to_base_factor  # Factor to convert to base unit
-        self.notes = notes
+    # Mass
+    "g": UnitCategory.MASS,
+    "gram": UnitCategory.MASS,
+    "kg": UnitCategory.MASS,
+    "kilogram": UnitCategory.MASS,
+    "mg": UnitCategory.MASS,
+    "milligram": UnitCategory.MASS,
+    "lb": UnitCategory.MASS,
+    "pound": UnitCategory.MASS,
+    "oz": UnitCategory.MASS,
+    "ounce": UnitCategory.MASS,
+    "ton": UnitCategory.MASS,
+    "tonne": UnitCategory.MASS,
     
-    def __str__(self):
-        return f"{self.symbol} ({self.name})"
+    # Temperature
+    "degC": UnitCategory.TEMPERATURE,
+    "celsius": UnitCategory.TEMPERATURE,
+    "degF": UnitCategory.TEMPERATURE,
+    "fahrenheit": UnitCategory.TEMPERATURE,
+    "K": UnitCategory.TEMPERATURE,
+    "kelvin": UnitCategory.TEMPERATURE,
+    "degR": UnitCategory.TEMPERATURE,
+    "rankine": UnitCategory.TEMPERATURE,
     
-    def __repr__(self):
-        return f"Unit('{self.symbol}', '{self.name}', {self.category})"
-
-
-# Unit definitions with conversion factors to base units
-UNITS: Dict[str, Unit] = {
-    # Length units (base: meter)
-    "mm": Unit("mm", "millimeter", UnitCategory.LENGTH, 0.001),
-    "cm": Unit("cm", "centimeter", UnitCategory.LENGTH, 0.01),
-    "m": Unit("m", "meter", UnitCategory.LENGTH, 1.0),
-    "in": Unit("in", "inch", UnitCategory.LENGTH, 0.0254),
-    "ft": Unit("ft", "foot", UnitCategory.LENGTH, 0.3048),
+    # Pressure
+    "Pa": UnitCategory.PRESSURE,
+    "pascal": UnitCategory.PRESSURE,
+    "kPa": UnitCategory.PRESSURE,
+    "bar": UnitCategory.PRESSURE,
+    "psi": UnitCategory.PRESSURE,
+    "atm": UnitCategory.PRESSURE,
+    "atmosphere": UnitCategory.PRESSURE,
+    "mmHg": UnitCategory.PRESSURE,
+    "torr": UnitCategory.PRESSURE,
     
-    # Mass units (base: gram)
-    "g": Unit("g", "gram", UnitCategory.MASS, 1.0, "Assumed gram; could mean gravitational acceleration (g)"),
+    # Volume
+    "L": UnitCategory.VOLUME,
+    "liter": UnitCategory.VOLUME,
+    "mL": UnitCategory.VOLUME,
+    "milliliter": UnitCategory.VOLUME,
+    "gal": UnitCategory.VOLUME,
+    "gallon": UnitCategory.VOLUME,
+    "qt": UnitCategory.VOLUME,
+    "quart": UnitCategory.VOLUME,
+    "cup": UnitCategory.VOLUME,
+    "fl_oz": UnitCategory.VOLUME,
     
-    # Temperature units (special handling required)
-    "DEG_C": Unit("°C", "degrees Celsius", UnitCategory.TEMPERATURE, 1.0),
-    "DEG_F": Unit("°F", "degrees Fahrenheit", UnitCategory.TEMPERATURE, 1.0),
+    # Flow
+    "CFM": UnitCategory.FLOW,
+    "L/s": UnitCategory.FLOW,
+    "m3/s": UnitCategory.FLOW,
+    "gal/min": UnitCategory.FLOW,
     
-    # Pressure units (base: Pascal)
-    "BAR": Unit("bar", "bar", UnitCategory.PRESSURE, 100000, "1 bar = 100 kPa"),
-    "BAR_G": Unit("bar(g)", "bar gauge", UnitCategory.PRESSURE, 100000, "Gauge pressure variant"),
+    # Velocity
+    "m/s": UnitCategory.VELOCITY,
+    "km/h": UnitCategory.VELOCITY,
+    "mph": UnitCategory.VELOCITY,
+    "ft/s": UnitCategory.VELOCITY,
+    "knot": UnitCategory.VELOCITY,
     
-    # Flow units (base: cubic meter per second)
-    "CFM": Unit("CFM", "cubic feet per minute", UnitCategory.FLOW, 0.000471947, "Imperial volumetric flow"),
+    # Acceleration
+    "m/s2": UnitCategory.ACCELERATION,
+    "ft/s2": UnitCategory.ACCELERATION,
     
-    # Electrical current (base: Ampere)
-    "A": Unit("A", "ampere", UnitCategory.ELECTRICAL_CURRENT, 1.0),
+    # Force
+    "N": UnitCategory.FORCE,
+    "newton": UnitCategory.FORCE,
+    "lbf": UnitCategory.FORCE,
+    "kN": UnitCategory.FORCE,
     
-    # Acoustics/signal level (base: decibel)
-    "DB": Unit("dB", "decibel", UnitCategory.ACOUSTICS, 1.0, "Logarithmic unit"),
+    # Energy
+    "J": UnitCategory.ENERGY,
+    "joule": UnitCategory.ENERGY,
+    "kJ": UnitCategory.ENERGY,
+    "cal": UnitCategory.ENERGY,
+    "calorie": UnitCategory.ENERGY,
+    "kcal": UnitCategory.ENERGY,
+    "Wh": UnitCategory.ENERGY,
+    "kWh": UnitCategory.ENERGY,
+    "BTU": UnitCategory.ENERGY,
+    "eV": UnitCategory.ENERGY,
     
-    # Velocity units (base: meter per second)
-    "FT/SEC": Unit("ft/s", "foot per second", UnitCategory.VELOCITY, 0.3048),
+    # Power
+    "W": UnitCategory.POWER,
+    "watt": UnitCategory.POWER,
+    "kW": UnitCategory.POWER,
+    "MW": UnitCategory.POWER,
+    "hp": UnitCategory.POWER,
+    "horsepower": UnitCategory.POWER,
     
-    # Frequency units (base: Hertz)
-    "GHZ": Unit("GHz", "gigahertz", UnitCategory.FREQUENCY, 1e9),
+    # Electrical
+    "A": UnitCategory.ELECTRICAL_CURRENT,
+    "ampere": UnitCategory.ELECTRICAL_CURRENT,
+    "mA": UnitCategory.ELECTRICAL_CURRENT,
+    "V": UnitCategory.ELECTRICAL_POTENTIAL,
+    "volt": UnitCategory.ELECTRICAL_POTENTIAL,
+    "kV": UnitCategory.ELECTRICAL_POTENTIAL,
+    "ohm": UnitCategory.ELECTRICAL_RESISTANCE,
+    "Ω": UnitCategory.ELECTRICAL_RESISTANCE,
+    "kohm": UnitCategory.ELECTRICAL_RESISTANCE,
+    "Mohm": UnitCategory.ELECTRICAL_RESISTANCE,
+    "F": UnitCategory.ELECTRICAL_CAPACITANCE,
+    "farad": UnitCategory.ELECTRICAL_CAPACITANCE,
+    "uF": UnitCategory.ELECTRICAL_CAPACITANCE,
+    "pF": UnitCategory.ELECTRICAL_CAPACITANCE,
     
-    # Electrical resistance (base: Ohm)
-    "GOHM": Unit("GΩ", "gigaohm", UnitCategory.ELECTRICAL_RESISTANCE, 1e9, "Assumed gigaohm; symbol often GΩ"),
+    # Frequency
+    "Hz": UnitCategory.FREQUENCY,
+    "hertz": UnitCategory.FREQUENCY,
+    "kHz": UnitCategory.FREQUENCY,
+    "MHz": UnitCategory.FREQUENCY,
+    "GHz": UnitCategory.FREQUENCY,
+    
+    # Angle
+    "rad": UnitCategory.ANGLE,
+    "radian": UnitCategory.ANGLE,
+    "deg": UnitCategory.ANGLE,
+    "degree": UnitCategory.ANGLE,
+    
+    # Time
+    "s": UnitCategory.TIME,
+    "second": UnitCategory.TIME,
+    "min": UnitCategory.TIME,
+    "minute": UnitCategory.TIME,
+    "h": UnitCategory.TIME,
+    "hour": UnitCategory.TIME,
+    "day": UnitCategory.TIME,
+    "week": UnitCategory.TIME,
+    "year": UnitCategory.TIME,
+    
+    # Area
+    "m2": UnitCategory.AREA,
+    "km2": UnitCategory.AREA,
+    "ft2": UnitCategory.AREA,
+    "acre": UnitCategory.AREA,
+    "hectare": UnitCategory.AREA,
+    
+    # Density
+    "kg/m3": UnitCategory.DENSITY,
+    "g/cm3": UnitCategory.DENSITY,
+    "lb/ft3": UnitCategory.DENSITY,
+    
+    # Acoustics
+    "dB": UnitCategory.ACOUSTICS,
+    "decibel": UnitCategory.ACOUSTICS,
 }
+
+
+def get_unit_category(unit_symbol: str) -> Optional[UnitCategory]:
+    """
+    Get the category for a given unit symbol.
+    
+    Args:
+        unit_symbol: Unit symbol to look up
+        
+    Returns:
+        UnitCategory or None if not found
+    """
+    return UNIT_CATEGORY_MAP.get(unit_symbol)
+
+
+def get_category_units(category: UnitCategory) -> List[str]:
+    """
+    Get all unit symbols for a given category.
+    
+    Args:
+        category: UnitCategory to filter by
+        
+    Returns:
+        List of unit symbols
+    """
+    return [unit for unit, cat in UNIT_CATEGORY_MAP.items() if cat == category]
+
+
+def register_custom_unit(symbol: str, definition: str, category: UnitCategory = None):
+    """
+    Register a custom unit with Pint.
+    
+    Args:
+        symbol: Unit symbol
+        definition: Pint definition (e.g., "1000 * meter")
+        category: Optional category for the unit
+    """
+    try:
+        UNIT_REGISTRY.define(f"{symbol} = {definition}")
+        if category:
+            UNIT_CATEGORY_MAP[symbol] = category
+    except Exception as e:
+        raise ValueError(f"Failed to register unit '{symbol}': {str(e)}")
