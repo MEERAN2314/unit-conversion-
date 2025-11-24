@@ -11,6 +11,8 @@ class UnitConverterApp {
         this.setupKeyboardShortcuts();
         this.setupFormPersistence();
         this.setupTooltips();
+        this.setupResponsiveHandlers();
+        this.setupViewportFix();
     }
 
     setupEventListeners() {
@@ -144,18 +146,35 @@ class UnitConverterApp {
     }
 
     setupHoverEffects() {
-        // Enhanced hover effects for interactive elements
-        const interactiveElements = document.querySelectorAll('.unit-card, .form-check, .btn');
-        
-        interactiveElements.forEach(element => {
-            element.addEventListener('mouseenter', () => {
-                element.style.transform = 'translateY(-2px)';
-            });
+        // Enhanced hover effects for interactive elements (desktop only)
+        if (window.matchMedia('(hover: hover)').matches) {
+            const interactiveElements = document.querySelectorAll('.unit-card, .form-check, .btn');
             
-            element.addEventListener('mouseleave', () => {
-                element.style.transform = 'translateY(0)';
+            interactiveElements.forEach(element => {
+                element.addEventListener('mouseenter', () => {
+                    element.style.transform = 'translateY(-2px)';
+                });
+                
+                element.addEventListener('mouseleave', () => {
+                    element.style.transform = 'translateY(0)';
+                });
             });
-        });
+        }
+        
+        // Touch feedback for mobile devices
+        if ('ontouchstart' in window) {
+            const touchElements = document.querySelectorAll('.btn, .unit-card, .form-check');
+            
+            touchElements.forEach(element => {
+                element.addEventListener('touchstart', () => {
+                    element.style.opacity = '0.8';
+                });
+                
+                element.addEventListener('touchend', () => {
+                    element.style.opacity = '1';
+                });
+            });
+        }
     }
 
     validateForm() {
@@ -296,6 +315,97 @@ class UnitConverterApp {
             clearTimeout(timeout);
             timeout = setTimeout(later, wait);
         };
+    }
+
+    setupResponsiveHandlers() {
+        // Handle orientation changes
+        window.addEventListener('orientationchange', () => {
+            setTimeout(() => {
+                this.adjustLayoutForOrientation();
+            }, 100);
+        });
+
+        // Handle window resize
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                this.adjustLayoutForViewport();
+            }, 250);
+        });
+
+        // Initial adjustment
+        this.adjustLayoutForViewport();
+    }
+
+    setupViewportFix() {
+        // Fix for mobile viewport height issues (especially iOS)
+        const setViewportHeight = () => {
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        };
+
+        setViewportHeight();
+        window.addEventListener('resize', setViewportHeight);
+        window.addEventListener('orientationchange', setViewportHeight);
+    }
+
+    adjustLayoutForOrientation() {
+        const isLandscape = window.matchMedia('(orientation: landscape)').matches;
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+
+        if (isLandscape && isMobile) {
+            // Compact mode for mobile landscape
+            document.body.classList.add('landscape-mode');
+            
+            // Reduce padding and margins
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.style.marginBottom = '1rem';
+            });
+        } else {
+            document.body.classList.remove('landscape-mode');
+            
+            // Restore normal spacing
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.style.marginBottom = '';
+            });
+        }
+    }
+
+    adjustLayoutForViewport() {
+        const viewportWidth = window.innerWidth;
+        
+        // Adjust font sizes for very small screens
+        if (viewportWidth < 360) {
+            document.documentElement.style.fontSize = '14px';
+        } else if (viewportWidth < 400) {
+            document.documentElement.style.fontSize = '15px';
+        } else {
+            document.documentElement.style.fontSize = '16px';
+        }
+
+        // Adjust table display for mobile
+        const tables = document.querySelectorAll('.table-responsive');
+        tables.forEach(table => {
+            if (viewportWidth < 768) {
+                table.style.overflowX = 'auto';
+                table.style.webkitOverflowScrolling = 'touch';
+            }
+        });
+
+        // Adjust button groups for mobile
+        const buttonGroups = document.querySelectorAll('.btn-group');
+        buttonGroups.forEach(group => {
+            if (viewportWidth < 576) {
+                group.classList.add('btn-group-vertical');
+                group.classList.remove('btn-group');
+            } else {
+                group.classList.add('btn-group');
+                group.classList.remove('btn-group-vertical');
+            }
+        });
     }
 }
 

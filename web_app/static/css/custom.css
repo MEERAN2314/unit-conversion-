@@ -154,6 +154,106 @@
         padding: 0.75rem 1.5rem;
         font-size: 1rem;
     }
+    
+    /* Stack badges vertically on small screens */
+    .d-flex.gap-3 .badge {
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+    
+    /* Make tables more readable on mobile */
+    .table-responsive table {
+        min-width: 600px;
+    }
+    
+    /* Improve form spacing on mobile */
+    .mb-4 {
+        margin-bottom: 1rem !important;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 400px) {
+    .card-header h3,
+    .card-header h4,
+    .card-header h5 {
+        font-size: 0.95rem;
+    }
+    
+    .card-header i {
+        font-size: 0.9rem;
+    }
+    
+    .btn {
+        font-size: 0.85rem;
+        padding: 0.5rem 1rem;
+    }
+}
+
+/* Tablet landscape */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    .container {
+        max-width: 95%;
+    }
+    
+    .row {
+        margin-left: -10px;
+        margin-right: -10px;
+    }
+    
+    .row > * {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+/* Improve touch targets */
+@media (pointer: coarse) {
+    .btn,
+    .form-control,
+    .form-select,
+    .form-check-input,
+    .nav-link {
+        min-height: 44px;
+    }
+    
+    .form-check-label {
+        padding: 0.5rem;
+        cursor: pointer;
+    }
+}
+
+/* Flexible images and embeds */
+img,
+video,
+iframe {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Prevent horizontal scroll */
+body {
+    overflow-x: hidden;
+}
+
+.container,
+.container-fluid {
+    overflow-x: hidden;
+}
+
+/* Flexible grid for unit cards */
+@media (max-width: 768px) {
+    .col-md-6.col-lg-4 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+    .col-md-6.col-lg-4 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
 }
 
 /* Print optimizations */
@@ -202,5 +302,492 @@
     .form-control,
     .form-select {
         border: 2px solid var(--primary-blue);
+    }
+}
+
+/* 
+===================================
+   MOBILE-FIRST RESPONSIVE ENHANCEMENTS
+   =================================== */
+
+/* Smooth scrolling for all devices */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Prevent text size adjustment on orientation change */
+html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+/* Better tap highlighting */
+* {
+    -webkit-tap-highlight-color: rgba(59, 130, 246, 0.2);
+}
+
+/* Improve readability on mobile */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Flexible containers */
+.container,
+.container-fluid {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* Mobile navigation improvements */
+@media (max-width: 991px) {
+    .navbar-collapse {
+        background: rgba(30, 64, 175, 0.98);
+        padding: 1rem;
+        border-radius: 0.5rem;
+        margin-top: 0.5rem;
+    }
+    
+    .navbar-nav {
+        align-items: stretch;
+    }
+    
+    .navbar-nav .nav-link {
+        padding: 0.75rem 1rem;
+        border-radius: 0.375rem;
+        margin: 0.25rem 0;
+    }
+    
+    .navbar-nav .nav-link:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+}
+
+/* Improved form controls for touch */
+@media (max-width: 768px) {
+    .form-control,
+    .form-select {
+        font-size: 16px; /* Prevents zoom on iOS */
+        padding: 14px 16px;
+    }
+    
+    .form-label {
+        font-size: 0.95rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .form-text {
+        font-size: 0.8rem;
+        margin-top: 0.25rem;
+    }
+}
+
+/* Card responsiveness */
+@media (max-width: 576px) {
+    .card {
+        border-radius: 15px;
+        margin-bottom: 1rem;
+    }
+    
+    .card-header {
+        padding: 0.875rem 1rem;
+        border-radius: 15px 15px 0 0;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+    
+    .card-title {
+        font-size: 1rem;
+    }
+}
+
+/* Better button spacing on mobile */
+@media (max-width: 576px) {
+    .btn {
+        padding: 0.625rem 1.25rem;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .btn-lg {
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+    }
+    
+    .btn-sm {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+    
+    .btn-group {
+        width: 100%;
+    }
+    
+    .btn-group .btn {
+        flex: 1;
+    }
+}
+
+/* Responsive tables */
+@media (max-width: 768px) {
+    .table-responsive {
+        border: 0;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .table {
+        min-width: 600px;
+        font-size: 0.85rem;
+    }
+    
+    .table th,
+    .table td {
+        padding: 0.5rem;
+        white-space: nowrap;
+    }
+}
+
+/* Responsive badges */
+@media (max-width: 576px) {
+    .badge {
+        font-size: 0.75rem;
+        padding: 0.35rem 0.65rem;
+        display: inline-block;
+        margin: 0.25rem;
+    }
+}
+
+/* Responsive spacing utilities */
+@media (max-width: 768px) {
+    .my-5 {
+        margin-top: 2rem !important;
+        margin-bottom: 2rem !important;
+    }
+    
+    .mb-5 {
+        margin-bottom: 2rem !important;
+    }
+    
+    .py-5 {
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .my-5 {
+        margin-top: 1.5rem !important;
+        margin-bottom: 1.5rem !important;
+    }
+    
+    .mb-5 {
+        margin-bottom: 1.5rem !important;
+    }
+    
+    .py-5 {
+        padding-top: 1.5rem !important;
+        padding-bottom: 1.5rem !important;
+    }
+    
+    .gap-3 {
+        gap: 0.75rem !important;
+    }
+}
+
+/* Responsive typography */
+@media (max-width: 576px) {
+    h1 {
+        font-size: 1.75rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    h3 {
+        font-size: 1.25rem;
+    }
+    
+    h4 {
+        font-size: 1.1rem;
+    }
+    
+    h5 {
+        font-size: 1rem;
+    }
+    
+    h6 {
+        font-size: 0.9rem;
+    }
+    
+    .lead {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+}
+
+/* Feature icons responsive sizing */
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .feature-icon {
+        font-size: 2.5rem;
+        margin-bottom: 0.75rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .feature-icon {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* Responsive footer */
+@media (max-width: 768px) {
+    .footer {
+        padding: 2rem 0;
+        margin-top: 3rem;
+    }
+    
+    .footer .row > div {
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+    
+    .footer .d-flex {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Landscape mode optimizations */
+@media (max-height: 600px) and (orientation: landscape) {
+    .navbar {
+        padding: 0.25rem 0;
+    }
+    
+    .display-4 {
+        font-size: 1.75rem;
+        margin-bottom: 1rem !important;
+    }
+    
+    .lead {
+        font-size: 0.9rem;
+        margin-bottom: 1rem !important;
+    }
+    
+    .card {
+        margin-bottom: 1rem;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+    
+    .my-5 {
+        margin-top: 1rem !important;
+        margin-bottom: 1rem !important;
+    }
+}
+
+/* iOS specific fixes */
+@supports (-webkit-touch-callout: none) {
+    /* Fix for iOS Safari bottom bar */
+    body {
+        min-height: -webkit-fill-available;
+    }
+    
+    /* Prevent iOS zoom on input focus */
+    input[type="text"],
+    input[type="number"],
+    select,
+    textarea {
+        font-size: 16px !important;
+    }
+}
+
+/* Android specific fixes */
+@media screen and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: .001dpcm) {
+    select {
+        background-position: right 0.5rem center;
+    }
+}
+
+/* Accessibility improvements for mobile */
+@media (max-width: 768px) {
+    /* Larger touch targets */
+    a,
+    button,
+    input,
+    select,
+    textarea {
+        min-height: 44px;
+    }
+    
+    /* Better focus indicators */
+    *:focus {
+        outline: 2px solid var(--secondary-blue);
+        outline-offset: 2px;
+    }
+}
+
+/* Prevent layout shift */
+img,
+video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Responsive grid improvements */
+@media (max-width: 576px) {
+    .row {
+        margin-left: -10px;
+        margin-right: -10px;
+    }
+    
+    .row > * {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+/* Loading states for mobile */
+.loading-mobile {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+}
+
+/* Toast notifications positioning for mobile */
+@media (max-width: 576px) {
+    .toast-container {
+        left: 50% !important;
+        right: auto !important;
+        transform: translateX(-50%);
+        width: calc(100% - 2rem);
+        max-width: 400px;
+    }
+    
+    .toast {
+        width: 100%;
+    }
+}
+
+/* Improved modal responsiveness */
+@media (max-width: 576px) {
+    .modal-dialog {
+        margin: 0.5rem;
+        max-width: calc(100% - 1rem);
+    }
+    
+    .modal-content {
+        border-radius: 15px;
+    }
+}
+
+/* Better scrollbar for mobile */
+@media (max-width: 768px) {
+    ::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+    }
+}
+
+/* Prevent overscroll on iOS */
+body {
+    overscroll-behavior-y: none;
+}
+
+/* Safe area insets for notched devices */
+@supports (padding: max(0px)) {
+    body {
+        padding-left: max(0px, env(safe-area-inset-left));
+        padding-right: max(0px, env(safe-area-inset-right));
+    }
+    
+    .navbar {
+        padding-left: max(1rem, env(safe-area-inset-left));
+        padding-right: max(1rem, env(safe-area-inset-right));
+    }
+    
+    .container {
+        padding-left: max(15px, env(safe-area-inset-left));
+        padding-right: max(15px, env(safe-area-inset-right));
+    }
+}
+
+/* Dark mode support (optional) */
+@media (prefers-color-scheme: dark) {
+    /* Add dark mode styles if needed */
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .card,
+    .btn,
+    .form-control,
+    .form-select {
+        border-width: 2px;
+    }
+}
+
+/* Print optimizations */
+@media print {
+    /* Hide non-essential elements */
+    .navbar,
+    .footer,
+    .btn,
+    .toast-container,
+    .no-print {
+        display: none !important;
+    }
+    
+    /* Optimize layout for print */
+    body {
+        background: white;
+        color: black;
+    }
+    
+    .card {
+        border: 1px solid #000;
+        page-break-inside: avoid;
+    }
+    
+    .conversion-result {
+        background: #f0f0f0 !important;
+        color: #000 !important;
+    }
+    
+    /* Ensure colors print correctly */
+    * {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
     }
 }
