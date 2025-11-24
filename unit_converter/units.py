@@ -1,7 +1,3 @@
-"""
-Dynamic unit definitions using Pint library with 4000+ units support.
-"""
-
 from enum import Enum
 from typing import Dict, List, Optional
 import pint
@@ -11,7 +7,7 @@ UNIT_REGISTRY = pint.UnitRegistry()
 
 
 class UnitCategory(Enum):
-    """Categories of units supported by the converter."""
+
     LENGTH = "length"
     MASS = "mass"
     TEMPERATURE = "temperature"
@@ -35,7 +31,7 @@ class UnitCategory(Enum):
     ACOUSTICS = "acoustics"
 
 
-# Mapping of unit symbols to categories for quick lookup
+
 UNIT_CATEGORY_MAP: Dict[str, UnitCategory] = {
     # Length
     "mm": UnitCategory.LENGTH,
@@ -208,40 +204,17 @@ UNIT_CATEGORY_MAP: Dict[str, UnitCategory] = {
 
 
 def get_unit_category(unit_symbol: str) -> Optional[UnitCategory]:
-    """
-    Get the category for a given unit symbol.
-    
-    Args:
-        unit_symbol: Unit symbol to look up
-        
-    Returns:
-        UnitCategory or None if not found
-    """
+
     return UNIT_CATEGORY_MAP.get(unit_symbol)
 
 
 def get_category_units(category: UnitCategory) -> List[str]:
-    """
-    Get all unit symbols for a given category.
-    
-    Args:
-        category: UnitCategory to filter by
-        
-    Returns:
-        List of unit symbols
-    """
+
     return [unit for unit, cat in UNIT_CATEGORY_MAP.items() if cat == category]
 
 
 def register_custom_unit(symbol: str, definition: str, category: UnitCategory = None):
-    """
-    Register a custom unit with Pint.
-    
-    Args:
-        symbol: Unit symbol
-        definition: Pint definition (e.g., "1000 * meter")
-        category: Optional category for the unit
-    """
+
     try:
         UNIT_REGISTRY.define(f"{symbol} = {definition}")
         if category:

@@ -4,7 +4,6 @@ from .units import UNIT_REGISTRY, UnitCategory, get_unit_category, get_category_
 
 
 class ConversionResult:
-    """Represents the result of a unit conversion."""
     
     def __init__(self, original_value: float, original_unit: str, 
                  conversions: Dict[str, float]):
@@ -13,7 +12,6 @@ class ConversionResult:
         self.conversions = conversions
     
     def get_conversion(self, target_unit: str) -> Optional[float]:
-        """Get conversion result for a specific unit."""
         return self.conversions.get(target_unit)
     
     def __str__(self):
@@ -25,32 +23,12 @@ class ConversionResult:
 
 
 class UnitConverter:
-    """
-    Dynamic unit converter using Pint library.
-    Supports 4000+ units with automatic dimensional analysis.
-    """
-    
     def __init__(self):
         self.ureg = UNIT_REGISTRY
         self._cache = {}
     
     def convert(self, value: float, from_unit: str, 
                 to_units: Optional[List[str]] = None) -> ConversionResult:
-        """
-        Convert a value from one unit to other units dynamically.
-        
-        Args:
-            value: The numeric value to convert
-            from_unit: Source unit symbol (supports Pint notation)
-            to_units: List of target unit symbols. If None, converts to all 
-                     compatible units in the same category.
-        
-        Returns:
-            ConversionResult object containing all conversions
-        
-        Raises:
-            ValueError: If units are invalid or incompatible
-        """
         try:
             # Create quantity with Pint
             quantity = self.ureg.Quantity(value, from_unit)
@@ -80,16 +58,6 @@ class UnitConverter:
         return ConversionResult(value, from_unit, conversions)
     
     def _find_compatible_units(self, unit: str, limit: int = 20) -> List[str]:
-        """
-        Find units compatible with the given unit using dimensional analysis.
-        
-        Args:
-            unit: Source unit
-            limit: Maximum number of compatible units to return
-            
-        Returns:
-            List of compatible unit symbols
-        """
         try:
             quantity = self.ureg.Quantity(1, unit)
             dimensionality = quantity.dimensionality
@@ -115,22 +83,13 @@ class UnitConverter:
             return []
     
     def _get_common_units(self) -> List[str]:
-        """Get list of commonly used units across all categories."""
         common = []
         for category in UnitCategory:
             common.extend(get_category_units(category))
         return common
     
     def get_supported_units(self, category: Optional[UnitCategory] = None) -> List[str]:
-        """
-        Get list of supported unit symbols.
-        
-        Args:
-            category: Optional category filter
-            
-        Returns:
-            List of unit symbols
-        """
+
         if category is None:
             # Return all common units
             return self._get_common_units()
@@ -138,15 +97,7 @@ class UnitConverter:
         return get_category_units(category)
     
     def get_unit_info(self, unit_symbol: str) -> Dict[str, any]:
-        """
-        Get detailed information about a unit using Pint.
-        
-        Args:
-            unit_symbol: Unit symbol to query
-            
-        Returns:
-            Dictionary with unit information
-        """
+
         try:
             unit = self.ureg.Unit(unit_symbol)
             quantity = self.ureg.Quantity(1, unit)
@@ -164,7 +115,6 @@ class UnitConverter:
             raise ValueError(f"Unknown unit: {unit_symbol}")
     
     def _get_unit_notes(self, unit_symbol: str) -> str:
-        """Get descriptive notes for a unit."""
         notes_map = {
             'bar': '1 bar = 100 kPa',
             'CFM': 'Cubic feet per minute',
@@ -176,18 +126,7 @@ class UnitConverter:
     
     def convert_with_context(self, value: float, from_unit: str, 
                             to_unit: str, context: str = None) -> float:
-        """
-        Convert with optional context (e.g., 'spectroscopy' for wavelength).
-        
-        Args:
-            value: Value to convert
-            from_unit: Source unit
-            to_unit: Target unit
-            context: Optional Pint context
-            
-        Returns:
-            Converted value
-        """
+
         try:
             quantity = self.ureg.Quantity(value, from_unit)
             
@@ -202,15 +141,7 @@ class UnitConverter:
             raise ValueError(f"Conversion failed: {str(e)}")
     
     def parse_expression(self, expression: str) -> Dict[str, any]:
-        """
-        Parse and evaluate unit expressions like '5 meters + 3 feet'.
-        
-        Args:
-            expression: Mathematical expression with units
-            
-        Returns:
-            Dictionary with result and unit
-        """
+
         try:
             result = self.ureg.parse_expression(expression)
             return {
