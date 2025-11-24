@@ -1,7 +1,3 @@
-"""
-Main unit conversion logic using Pint library for dynamic conversions.
-"""
-
 from typing import Dict, List, Optional, Set
 import pint
 from .units import UNIT_REGISTRY, UnitCategory, get_unit_category, get_category_units
