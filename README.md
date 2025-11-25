@@ -669,9 +669,3 @@ For support, please:
 Made with ❤️ using Python, FastAPI, and modern web technologies.
 
 ---
-
-### 🚀 Ready to Deploy?
-
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
-
-See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed deployment instructions.
