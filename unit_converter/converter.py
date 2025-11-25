@@ -4,7 +4,7 @@ Main unit conversion logic using Pint library for dynamic conversions.
 
 from typing import Dict, List, Optional, Set
 import pint
-from .units import UNIT_REGISTRY, UnitCategory, get_unit_category, get_category_units
+from .units import UNIT_REGISTRY, UnitCategory, get_unit_category, get_category_units, get_unit_display_name
 
 
 class ConversionResult:
@@ -159,7 +159,7 @@ class UnitConverter:
             
             return {
                 'symbol': unit_symbol,
-                'name': str(unit),
+                'name': get_unit_display_name(unit_symbol),
                 'dimensionality': str(quantity.dimensionality),
                 'category': category.value if category else 'other',
                 'notes': self._get_unit_notes(unit_symbol)
